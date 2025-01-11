@@ -21,12 +21,16 @@ typedef struct {
   // the bytecode array
   uint8_t *bytecode;
 
+  // Each number in the array is the line number for the
+  // corresponding byte in the bytecode
+  int *lines;
+
   // associated constants with the chunk
   ValueArray constants;
 } Chunk;
 
 void initChunk(Chunk *chunk);
-void writeChunk(Chunk *chunk, uint8_t byte);
+void writeChunk(Chunk *chunk, uint8_t byte, int line);
 
 // Add a constant to a chunk
 // return the index where the constant was appended
