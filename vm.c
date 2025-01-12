@@ -3,9 +3,11 @@
 
 #include "chunk.h"
 #include "common.h"
+#include "compiler.h"
 #include "debug.h"
 #include "value.h"
 #include "vm.h"
+
 
 VM vm;
 
@@ -88,12 +90,9 @@ static InterpretResult run() {
 #undef BINARY_OP
 }
 
-InterpretResult interpret(Chunk *chunk) {
-  vm.chunk = chunk;
-
-  // Point the IP at the start of the bytecode
-  vm.ip = chunk->bytecode;
-  return run();
+InterpretResult interpret(const char *source) {
+  compile(source);
+  return INTERPRET_OK;
 }
 
 void push(Value value) {
