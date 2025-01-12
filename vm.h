@@ -4,6 +4,8 @@
 #include "chunk.h"
 #include "common.h"
 
+#define MAX_STACK_LIMIT 256
+
 typedef struct {
   // Chunk currently being operated on
   Chunk *chunk;
@@ -12,6 +14,11 @@ typedef struct {
   // always points to the next instruction
   // to be executed
   uint8_t *ip;
+
+  // Stack based VM
+  Value stack[MAX_STACK_LIMIT];
+  Value *stackTop; // Points at the element just past the element
+                   // containing the top value on the stack
 } VM;
 
 typedef enum {
@@ -24,5 +31,9 @@ void initVM();
 void freeVM();
 
 InterpretResult interpret(Chunk *chunk);
+
+// Stack operations
+void push(Value value);
+Value pop();
 
 #endif
