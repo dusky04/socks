@@ -112,6 +112,8 @@ static TokenType checkKeyword(int start, int length, const char *rest,
       memcmp(scanner.start + start, rest, length) == 0) {
     return type;
   }
+
+  // If not a reserved keyword
   return TOKEN_IDENTIFIER;
 }
 

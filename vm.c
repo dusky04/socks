@@ -8,7 +8,6 @@
 #include "value.h"
 #include "vm.h"
 
-
 VM vm;
 
 static void resetStack() {
@@ -91,8 +90,27 @@ static InterpretResult run() {
 }
 
 InterpretResult interpret(const char *source) {
-  compile(source);
-  return INTERPRET_OK;
+  Chunk chunk;
+  initChunk(&chunk);
+
+  // Can't compile
+  if (!compile(source, &chunk)) {
+    freeChunk(&chunk);
+    return INTERPRET_COMPILE_ERROR;
+  }
+
+  // The compiler will read the source
+  // and populate the empty chunk with bytecode
+
+  vm.chunk = &chunk;
+  // Point IP towards the starting of the bytecode
+  vm.ip = vm.chunk->bytecode;
+
+  InterpretResult result = run();
+
+  freeChunk(&chunk);
+
+  return result;
 }
 
 void push(Value value) {
