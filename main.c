@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "chunk.h"
-#include "debug.h"
 #include "vm.h"
 
 static void repl() {
@@ -43,6 +41,7 @@ static char *readFile(const char *path) {
   }
 
   size_t bytesRead = fread(buffer, sizeof(char), fileSize, file);
+  // if we don't read all the bytes in the file
   if (bytesRead < fileSize) {
     fprintf(stderr, "Could not open file \"%s\".\n", path);
     exit(74);
