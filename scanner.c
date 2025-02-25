@@ -109,6 +109,8 @@ void skipWhitespacesAndComments() {
 static TokenType checkKeyword(int start, int length, const char *rest,
                               TokenType type) {
   if (scanner.current - scanner.start == start + length &&
+      // memcmp(str1, str2, length) compares the first length bytes of str1 and
+      // str2
       memcmp(scanner.start + start, rest, length) == 0) {
     return type;
   }
