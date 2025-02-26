@@ -1,5 +1,5 @@
-#ifndef SOCKS_VALUE_H
-#define SOCKS_VALUE_H
+#ifndef FLUX_VALUE_H
+#define FLUX_VALUE_H
 
 #include "common.h"
 

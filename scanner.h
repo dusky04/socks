@@ -1,5 +1,5 @@
-#ifndef SOCKS_SCANNER_H
-#define SOCKS_SCANNER_H
+#ifndef FLUX_SCANNER_H
+#define FLUX_SCANNER_H
 
 typedef enum {
   // Single-character tokens.

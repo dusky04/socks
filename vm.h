@@ -1,5 +1,5 @@
-#ifndef SOCKS_VM_H
-#define SOCKS_VM_H
+#ifndef FLUX_VM_H
+#define FLUX_VM_H
 
 #include "chunk.h"
 #include "common.h"

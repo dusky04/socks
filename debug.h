@@ -1,5 +1,5 @@
-#ifndef SOCKS_DEBUG_H
-#define SOCKS_DEBUG_H
+#ifndef FLUX_DEBUG_H
+#define FLUX_DEBUG_H
 
 #include "chunk.h"
 

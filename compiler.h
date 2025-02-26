@@ -1,5 +1,5 @@
-#ifndef SOCKS_COMPILER_H
-#define SOCKS_COMPILER_H
+#ifndef FLUX_COMPILER_H
+#define FLUX_COMPILER_H
 
 #include "chunk.h"
 

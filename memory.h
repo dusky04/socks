@@ -1,5 +1,5 @@
-#ifndef SOCKS_MEMORY_H
-#define SOCKS_MEMORY_H
+#ifndef FLUX_MEMORY_H
+#define FLUX_MEMORY_H
 
 #include "common.h"
 

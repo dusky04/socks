@@ -1,5 +1,5 @@
-#ifndef SOCKS_COMMON_H
-#define SOCKS_COMMON_H
+#ifndef FLUX_COMMON_H
+#define FLUX_COMMON_H
 
 #include <stdbool.h>
 #include <stddef.h>

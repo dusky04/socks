@@ -1,5 +1,5 @@
-#ifndef SOCKS_CHUNK_H
-#define SOCKS_CHUNK_H
+#ifndef FLUX_CHUNK_H
+#define FLUX_CHUNK_H
 
 #include "common.h"
 #include "value.h"
