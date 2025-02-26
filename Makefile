@@ -1,8 +1,27 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -ggdb
+CC       = gcc
+SRCDIR   = src
+BUILDDIR = build
+INCDIR   = -Iinclude
+TARGET   = bin/flux
+CFLAGS   = -Wall -Wextra -ggdb
 
-flux: main.c chunk.c memory.c debug.c value.c vm.c compiler.c scanner.c
-	$(CC) $(CFLAGS) chunk.c main.c memory.c debug.c value.c vm.c compiler.c scanner.c -o flux
+SOURCES  = $(shell find $(SRCDIR) -type f -name '*.c')
+
+OBJECTS  = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.c=.o))
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	@echo "Linking object files..."
+	# @echo "$(CC) $(CFLAGS) $^ -o $(TARGET)"
+	$(CC) $(CFLAGS) $^ -o $(TARGET)
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@) 
+	# @echo "Compiling $<..."
+	# @echo "$(CC) $(CFLAGS) $(INCDIR) -c -o $@ $<"
+	$(CC) $(CFLAGS) $(INCDIR) -c -o $@ $<
 
 clean:
-	del flux.exe
+	rm -f $(TARGET)
+	rm -f $(BUILDDIR)/*.o
