@@ -3,7 +3,39 @@
 
 #include "common.h"
 
-typedef double Value;
+// Tagged Union
+typedef enum {
+  VAL_BOOL,
+  VAL_NIL,
+  VAL_NUMBER,
+} ValueType;
+
+typedef struct {
+
+  // To define what kind of Value it is
+  ValueType type;
+
+  // A value can be any one of these types right now
+  union {
+    bool boolean;
+    double number;
+  } as;
+
+} Value;
+
+// Macros to confirm whether a value is of the correct type we assumed it to be
+// Mostly so I don't blow myself in the foot
+#define IS_BOOL(value) ((value).type == VAL_BOOL)
+#define IS_NIL(value) ((value).type == VAL_NIL)
+#define IS_NUMBER(value) ((value).type == VAL_NUMBER)
+
+#define AS_BOOL(value) ((value).as.boolean)
+#define AS_NUMBER(value) ((value).as.number)
+
+// Macros for C types conversion to Value (which are flux types)
+#define BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})
+#define NIL_VAL ((Value){VAL_NIL, {.number = 0}})
+#define NUMBER_VAL(value) ((Value){VAL_NUMBER, {.number = value}})
 
 typedef struct {
   // Total number of entries the array can store

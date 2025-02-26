@@ -8,10 +8,15 @@ typedef enum {
   // OPCODE + index where the constant was stored
   OP_CONSTANT,
 
+  OP_NIL,
+  OP_TRUE,
+  OP_FALSE,
+
   OP_NEGATE,
   OP_ADD,
   OP_SUBTRACT,
   OP_MULTIPLY,
+  OP_NOT,
   OP_DIVIDE,
 
   OP_RETURN,
