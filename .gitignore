@@ -1,4 +1,2 @@
-*.exe
-*.out
-*.flux
-flux
+build/*
+bin/*
