@@ -48,6 +48,14 @@ typedef struct {
   Value *values;
 } ValueArray;
 
+// For each value type, we have a separate case that handles comparing the value
+// itself. Given how similar the cases are, you might wonder why we can’t simply
+// memcmp() the two Value structs and be done with it. The problem is that
+// because of padding and different-sized union fields, a Value contains unused
+// bits. C gives no guarantee about what is in those, so it’s possible that two
+// equal Values actually differ in memory that isn’t used.
+bool valuesEqual(Value a, Value b);
+
 void initValueArray(ValueArray *array);
 void writeValueArray(ValueArray *array, Value value);
 void printValue(Value value);

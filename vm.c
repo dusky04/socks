@@ -127,6 +127,20 @@ static InterpretResult run() {
     case OP_NOT:
       push(BOOL_VAL(isFalsey(pop())));
       break;
+    case OP_EQUAL: {
+      // Declaration immediately after a case <token> is not supported
+      // in earlier versions of C
+      Value b = pop();
+      Value a = pop();
+      push(BOOL_VAL(valuesEqual(a, b)));
+      break;
+    }
+    case OP_GREATER:
+      BINARY_OP(BOOL_VAL, >);
+      break;
+    case OP_LESS:
+      BINARY_OP(BOOL_VAL, <);
+      break;
     case OP_NEGATE:
       if (!IS_NUMBER(peek(0))) {
         runTimeError("Operand must be a number.");
