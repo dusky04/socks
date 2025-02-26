@@ -6,6 +6,7 @@
 
 #include "chunk.h"
 #include "compiler.h"
+#include "object.h"
 #include "scanner.h"
 #include "value.h"
 
@@ -57,6 +58,7 @@ static void unary();
 static void number();
 static void grouping();
 static void literal();
+static void string();
 static ParseRule *getRule(TokenType type);
 
 static Chunk *currentChunk() { return compilingChunk; }
@@ -190,7 +192,7 @@ ParseRule rules[] = {
     [TOKEN_LESS] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_LESS_EQUAL] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_IDENTIFIER] = {NULL, NULL, PREC_NONE},
-    [TOKEN_STRING] = {NULL, NULL, PREC_NONE},
+    [TOKEN_STRING] = {string, NULL, PREC_NONE},
     [TOKEN_NUMBER] = {number, NULL, PREC_NONE},
     [TOKEN_AND] = {NULL, NULL, PREC_NONE},
     [TOKEN_CLASS] = {NULL, NULL, PREC_NONE},
@@ -298,6 +300,12 @@ static void unary() {
   default:
     return;
   }
+}
+
+static void string() {
+  // The + 1 and - 2 parts trim the leading and trailing quotation marks.
+  emitConstant(OBJ_VAL(
+      copyString(parser.previous.start + 1, parser.previous.length - 2)));
 }
 
 static void expression() { parsePrecedence(PREC_ASSIGNMENT); }

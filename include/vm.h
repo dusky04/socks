@@ -18,7 +18,11 @@ typedef struct {
   // Stack based VM
   Value stack[MAX_STACK_LIMIT];
   Value *stackTop; // Points at the element just past the element
-                   // containing the top value on the stack
+  // containing the top value on the stack
+
+  // Array of all the objects created dynamically during runtime
+  // Done to free all the objects
+  Obj *objects;
 } VM;
 
 typedef enum {
@@ -26,6 +30,8 @@ typedef enum {
   INTERPRET_RUNTIME_ERROR,
   INTERPRET_COMPILE_ERROR
 } InterpretResult;
+
+extern VM vm;
 
 void initVM();
 void freeVM();
